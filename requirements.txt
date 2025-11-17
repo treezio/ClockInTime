@@ -1,0 +1,7 @@
+PyQt5>=5.15.0
+requests>=2.31.0
+keyring>=24.0.0
+pyobjc>=12.0
+pyobjc-framework-Cocoa>=10.0
+pyobjc-framework-FSEvents>=10.0
+pillow>=12.0.0
