@@ -1,4 +1,4 @@
-# ClockInTime for Factorial
+# ClockInTime
 
 A lightweight macOS menu bar application that automatically clocks in/out with Factorial HR when you login, logout, or put your Mac to sleep.
 
@@ -40,28 +40,6 @@ python3 clockintime_app.py
 
 Your password will be stored securely in macOS Keychain.
 
-### 3. Set Up Auto-Start (Optional but Recommended)
-
-To have the app start automatically when you log in:
-
-```bash
-# Make the app executable
-chmod +x clockintime_app.py
-
-# Copy the launch agent plist to LaunchAgents directory
-cp com.treezio.clockintime.plist ~/Library/LaunchAgents/
-
-# Edit the plist file to update the path to your installation
-nano ~/Library/LaunchAgents/com.treezio.clockintime.plist
-
-# Update these lines with your actual paths:
-# <string>/usr/local/bin/python3</string>
-# <string>/Users/YOUR_USERNAME/workspace/treezio/ClockInTime/app.py</string>
-
-# Load the launch agent
-launchctl load ~/Library/LaunchAgents/com.treezio.clockintime.plist
-```
-
 ## Usage
 
 ### Menu Bar Controls
@@ -86,31 +64,6 @@ The app checks Factorial's calendar API to determine if today is a working day. 
 - **Leave Days**: Your personal leave/vacation days
 
 This ensures you're never clocked in on days you shouldn't be working.
-
-## How It Works
-
-The application:
-
-1. **Authentication**: Uses the Factorial web authentication flow (same as https://github.com/alejoar/factorialsucks)
-   - Extracts CSRF token from login page
-   - Authenticates with your credentials
-   - Maintains session cookies
-
-2. **Working Day Detection**: Checks Factorial's calendar API
-   - Fetches your attendance calendar
-   - Identifies weekends, holidays, and leave days
-   - Only clocks in/out on actual working days
-
-3. **System Event Monitoring**: Monitors macOS system events using PyObjC
-   - Detects app startup (considered as login)
-   - Monitors sleep notifications
-   - Responds to system power events
-
-4. **Clock In/Out**: Makes API calls to Factorial
-   - Creates/updates shifts via the attendance API
-   - Uses your actual login/sleep time
-   - Handles existing shifts gracefully
-   - Provides feedback via logs
 
 ## Configuration Files
 
